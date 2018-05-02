@@ -30,9 +30,29 @@ import {
   emailsSubscriptionChart,
   completedTasksChart
 } from "variables/charts";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker
+} from "react-google-maps";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/dashboardStyle";
-
+const CustomSkinMap = withScriptjs(
+  withGoogleMap(props => (
+    <GoogleMap
+      defaultZoom={18}
+      defaultCenter={{ lat: 53.902429, lng: 30.338885 }}
+      defaultOptions={{
+        scrollwheel: false,
+        zoomControl: true,
+        
+      }}
+    >
+      <Marker position={{ lat: 53.902429, lng: 30.338885 }} />
+    </GoogleMap>
+  ))
+);
 class Dashboard extends React.Component {
   state = {
     value: 0
@@ -47,6 +67,14 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
+        <CustomSkinMap
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzaOm_m8RwN_dM7xzTx-HZAvLu0hnN_B4"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `100vh` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+        </div>
+    /*   <div>
         <Grid container>
           <ItemGrid xs={12} sm={6} md={3}>
             <StatsCard
@@ -182,7 +210,7 @@ class Dashboard extends React.Component {
             />
           </ItemGrid>
         </Grid>
-      </div>
+      </div> */
     );
   }
 }

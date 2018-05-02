@@ -34,7 +34,29 @@ const style = {
     width: "260px"
   }
 };
+
 function TypographyPage({ ...props }) {
+  return (
+      <div>
+          
+            <h3>The Life of Material Dashboard</h3>
+      
+        
+          <P>
+              I will be the leader of a company that ends up being worth
+              billions of dollars, because I got the answers. I understand
+              culture. I am the nucleus. I think that’s a responsibility that I
+              have, to push possibilities, to show people, this is the level
+              that things could be at.
+          </P>
+         
+         
+        </div>
+      
+  );
+}
+
+/* function TypographyPage({ ...props }) {
   return (
     <RegularCard
       cardTitle={"Material Dashboard Heading"}
@@ -135,6 +157,6 @@ function TypographyPage({ ...props }) {
       }
     />
   );
-}
+} */
 
 export default withStyles(style)(TypographyPage);
