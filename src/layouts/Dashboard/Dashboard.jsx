@@ -15,10 +15,13 @@ import appStyle from "assets/jss/material-dashboard-react/appStyle.jsx";
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
+
 const switchRoutes = (
   <Switch>
-    {dashboardRoutes.map((prop, key) => {
+    { dashboardRoutes.map((prop, key) => {
+
       console.log(key);
+      
       if (prop.redirect)
         return <Redirect from={prop.path} to={prop.to} key={key} />;
       return <Route path={prop.path} component={prop.component} key={key} />;
@@ -28,7 +31,11 @@ const switchRoutes = (
 
 class App extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
+    open: true };
+
+  handleClick = () => {
+    this.setState({ open: !this.state.open });
   };
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -51,12 +58,15 @@ class App extends React.Component {
       <div className={classes.wrapper}>
         <Sidebar
           routes={dashboardRoutes}
-          logoText={"Creative Tim"}
+          logoText={"Стройтрест 12"}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
+          handleClick={this.handleClick}
+          openTougle = {this.open}
           open={this.state.mobileOpen}
           color="blue"
+
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">

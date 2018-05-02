@@ -9,19 +9,23 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Collapse 
 } from "material-ui";
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import { HeaderLinks } from "components";
 
 import sidebarStyle from "assets/jss/material-dashboard-react/sidebarStyle.jsx";
 
 const Sidebar = ({ ...props }) => {
+  
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return props.location.pathname.indexOf(routeName) > -1 ? true : false;
   }
-  const { classes, color, logo, image, logoText, routes } = props;
+  const { classes, color, logo, image, logoText, routes, open } = props;
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
@@ -32,7 +36,38 @@ const Sidebar = ({ ...props }) => {
         const whiteFontClasses = cx({
           [" " + classes.whiteFont]: activeRoute(prop.path)
         });
+        if(prop.tougleList) {
+          
+            return (
+              <div>
+                <ListItem button onClick={props.handleClick}>
+                  <ListItemIcon>
+                    
+                  </ListItemIcon>
+                  <ListItemText inset primary={prop.sidebarName} />
+                  {props.openTougle ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                
+                <Collapse in={props.openTougle} timeout="auto" unmountOnExit>
+                {prop.routesTougle.map((prop, key) => {
+                    <ListItem button className={classes.itemLink + listItemClasses}>
+                      <ListItemIcon className={classes.itemIcon + whiteFontClasses}>
+                        <prop.icon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={prop.sidebarName}
+                        className={classes.itemText + whiteFontClasses}
+                        disableTypography={true}
+                      />
+                    </ListItem>
+                  })
+                }
+                </Collapse>
+              </div>
+              );
+          };
         return (
+        
           <NavLink
             to={prop.path}
             className={classes.item}
