@@ -39,31 +39,14 @@ const Sidebar = ({ ...props }) => {
         if(prop.tougleList) {
           
             return (
-              <div>
-                <ListItem button onClick={props.handleClick}>
-                  <ListItemIcon>
-                    
-                  </ListItemIcon>
+              
+                <ListItem button onClick={props.handleClick} className={classes.itemLink + listItemClasses} key="sadsfs">
+                 
                   <ListItemText inset primary={prop.sidebarName} />
-                  {props.openTougle ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 
-                <Collapse in={props.openTougle} timeout="auto" unmountOnExit>
-                {prop.routesTougle.map((prop, key) => {
-                    <ListItem button className={classes.itemLink + listItemClasses}>
-                      <ListItemIcon className={classes.itemIcon + whiteFontClasses}>
-                        <prop.icon />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={prop.sidebarName}
-                        className={classes.itemText + whiteFontClasses}
-                        disableTypography={true}
-                      />
-                    </ListItem>
-                  })
-                }
-                </Collapse>
-              </div>
+               
+             
               );
           };
         return (

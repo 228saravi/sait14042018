@@ -20,11 +20,18 @@ const switchRoutes = (
   <Switch>
     { dashboardRoutes.map((prop, key) => {
 
-      console.log(key);
+    
       
       if (prop.redirect)
         return <Redirect from={prop.path} to={prop.to} key={key} />;
-      return <Route path={prop.path} component={prop.component} key={key} />;
+      else if(prop.tougleList){prop.routesTougle.map((prop, key_) => {
+        console.log(Number(key+"."+key_));
+        return <Route path={prop.path} component={prop.component} key={Number(key+"."+key_)} />;
+      })
+
+      }else{
+      console.log(key);
+      return <Route path={prop.path} component={prop.component} key={key} />;}
     })}
   </Switch>
 );
